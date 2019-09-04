@@ -1,18 +1,3 @@
-#so we are going to be using openAIgymn library which is a collection of environments that we can use with the reinforcement learning algorithms
-#in frozen the environment is a grid with various states as seen below
-'''
-----------------------------------------------------------------
-| State|Description            |   Reward                        |
-|      |                       |                                 |
-|   S  |  starting point(safe) |    0                            |                                
-|      |                       |                                 |
-|   F  |  frozen surface(safe) |    0                            |
-|      |                       |                                 |
-|   H  |  hole(game over)      |    0                            |
-|      |                       |                                 | 
-|   G  |  goal(game over)      |    1                            |
------------------------------------------------------------------
-'''
 #import necessary libraries
 import numpy as np
 import gym
@@ -93,10 +78,46 @@ for episode in range(num_episodes):
 		  (max_exploration_rate - min_exploration_rate) * np.exp(-exploration_decay_rate * episode)#means that the exploration rate decreases at a rate proportional to its cureebnt value
 		#add current episode reward to total reward list
 		rewards_all_episodes.append(rewards_current_episode)#append the rewards from the current episode to rewards for all episodes
-#calculate anad print the average reward per thousand episodes
+'''
+#calculate and print the average reward per thousand episodes
 rewards_per_thousand_episodes = np.split(np.array(rewards_all_episodes),num_episodes/1000)
 count = 1000
-print('the average reward per thouasand episodes\n')
-for r in rewards_per_thousand_episodes:
+print('the average reward per thousand episodes\n')
+for r in rewards_per_thouasand_episodes:
 	print(count,':',str(sum(r/1000)))
-	count +=1000
+
+	count +=1000'''
+#after the training of the agenyt lets now see the agent in action on the environment using just 3 episodes
+for episode in range (3):
+	state = env.reset()
+	done = False
+	print('this is the beiginning of episode one')
+	time.sleep(1)#this is time given for us to see the print out on the console befre it disappears
+
+	#take on new time step params
+	for step in range(max_steps_per_episode):
+		clear_output(wait = True)#this is the IPython which clears the output from current cell and the wait ensures that the clear output waits to be overwritten by another output
+		env.render()#this renders the current state where the agent is located on the grid
+		time.sleep(0.3)#gives us time to see the rendered state that the agent is located in
+
+		action = np.argmax(q_table[state,:])#this sets the action to be the highest action in the Q-table for our current state 
+		new_state, reward, done, info = env.step(action)
+
+		#after getting the tuple with the new_state,reward and whether the action terminated our episode we can now keep on moving
+		if done:
+			clear_output(Wait= True)
+			env.render()
+			if reward == 1:
+				print('you reached the goal')
+				time.sleep(3)
+			else:#we know that if we do not get a reward of 1 then the reward is a 0
+				print('you fell into the hole')
+				time.sleep(3)
+				clear_output(wait = True)
+			break
+	    #if the last action did not complete the episode then we skip over the conditional clause and transition to the new state and move to the next time step
+	    #since we had already trained the model then we know that we can make actions based on exploitation rather than exploration
+	    state = new_state
+#close the environment on completion of the episodes
+env.close()
+
