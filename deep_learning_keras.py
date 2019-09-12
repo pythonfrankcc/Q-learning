@@ -21,6 +21,7 @@ model = Sequential(layers)
 layers = [
      Dense(16, input_shape = (1,), activation = 'relu'),#input layer with one nodes and the dense layer with 16 nodes
      Dense(32, activation = 'relu', kernel_regularizer = regularizers.l2(0.01)),#hidden layer with 32 nodes with a regularizer to reduce overfitting
+     BatchNormalization(axis = 1),#introducing batch normalization  in the second dense layer
      Dense(2, activation = 'sigmoid')#creating the output layer with only two nodes
 ]
 
@@ -34,9 +35,9 @@ model.compile(
 
 #training the model
 model.fit(
-	scaled_train_samples,#numpy array with training samples
+	scaled_train_samples,#numpy array with training samples which is normalized before being fed as input
 	train_labels,#numpy array with labels
-	validation_split = 0.2,#splittig 0.2% of the training data to be used as validation data
+	validation_split = 0.2,#splittig 0.2% of the training data to be used as validation data which is also normalized to avoid creating issues with the data such as an exploding gradient
 	batch_size = 10,#no of training samples passed as the input per iteration
 	epochs = 20,# no of times the full dataset is going to be passed through the neural net
 	shuffle = True,#data should be shuffled before being passed into the network to avoid overfitting
@@ -45,7 +46,7 @@ model.fit(
 
 #adding the test set for doing predictions on
 predictions = model.predict(
-	scaled_test_samples,#numpy array with test samples
+	scaled_test_samples,#numpy array with test samples and should also be normalized 
 	batch_size = 10,#no of test samples passed as the input per iteration
 	verbose = 0
 	)
