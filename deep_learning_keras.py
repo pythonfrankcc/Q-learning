@@ -24,6 +24,8 @@ layers = [
      BatchNormalization(axis = 1),#introducing batch normalization  in the second dense layer
      Dense(2, activation = 'sigmoid')#creating the output layer with only two nodes
 ]
+'''instead of BatchNormalization you can also specify beta_initializer and gamma_initializer which are the hyperparameters used in batch normalization
+but are defaultly set to a 0 and 1 i keras'''
 
 #compiling the model
 '''Adam is a special case of the SGD optimizer and lr is the learning rate attached to the optimizer'''
