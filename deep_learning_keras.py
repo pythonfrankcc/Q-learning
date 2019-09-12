@@ -7,7 +7,7 @@ import keras
 from keras.models import Sequential
 from keras import backend as K 
 from keras.layers.core import Dense
-from keras.layers import Activation
+from keras.layers import Activation,BatchNormalization
 from keras.optimizers import Adam
 from keras.metrics import categorical_cross entropy 
 from keras import regularizers#allows you to add penalty and are applied on a per layer basis
