@@ -34,6 +34,7 @@ model.compile(
 model.fit(
 	scaled_train_samples,#numpy array with training samples
 	train_labels,#numpy array with labels
+	validation_split = 0.2,#splittig 0.2% of the training data to be used as validation data
 	batch_size = 10,#no of training samples passed as the input per iteration
 	epochs = 20,# no of times the full dataset is going to be passed through the neural net
 	shuffle = True,#data should be shuffled before being passed into the network to avoid overfitting
