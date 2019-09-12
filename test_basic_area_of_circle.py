@@ -10,13 +10,13 @@ for r in radii:
 	Area = area_of_circle(r)
 	print(message.format(radius=r,area=Area))'''
 #from the above test function we can already see an error in our function but lets comment out this and carry out a unittest using unittest module
-#when running this on python best use >>python -m unittest (xxx)
+#when running this on python best use >>python -m unittest (xxx),where the -m instructs python to run the unttest module as a script
 #lets build our test class
 class testCircleArea(unittest.TestCase):
 	#each test method must begin with the word test
 	def test_area(self):
 		#test the computational soundness of the function
-		self.assertAlmostEqual(area_of_circle(1),pi)
+		self.assertAlmostEqual(area_of_circle(1),pi)#first arguement is the output of the function under test and second arguement is the correct answer
 		self.assertAlmostEqual(area_of_circle(2.1),pi*2.1**2)
 	#testing to see if the function  raises a value error when the input is a negative no
 	def test_values(self):
@@ -29,3 +29,9 @@ class testCircleArea(unittest.TestCase):
 		self.assertRaises(TypeError,area_of_circle,True)
 		self.assertRaises(TypeError,area_of_circle,'radius')
 		#then fix this on the function given
+'''to get help about a specific testing this is how you approach it
+import unittest
+help(unittest.Testcase.assertSetEqual)'''
+#getting the test to run automatically on cmd
+if __name__=='__main__':
+	unittest.main()

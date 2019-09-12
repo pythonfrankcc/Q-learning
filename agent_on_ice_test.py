@@ -57,7 +57,7 @@ for episode in range(num_episodes):
 			action = env.action_space.sample()#the agent explores by sampling an action at random
 
 		#take action after choosing whether to explore or exploit the environment
-		new_state, reward, done, info = env.step(action)
+		new_state, reward, done, info = env.step(action)  
 		'''the taking of the step action returns a tuple containing the new_state,the reward for the action that was taken,whether taking the action
 		ended the episode and diagnostic information about the environment that may be useful if we need to do debugging.
 		'''
@@ -101,7 +101,7 @@ for episode in range (3):
 		time.sleep(0.3)#gives us time to see the rendered state that the agent is located in
 
 		action = np.argmax(q_table[state,:])#this sets the action to be the highest action in the Q-table for our current state 
-		new_state, reward, done, info = env.step(action)
+		new_state, reward, done, info = env.step(action) 
 
 		#after getting the tuple with the new_state,reward and whether the action terminated our episode we can now keep on moving
 		if done:
@@ -115,9 +115,10 @@ for episode in range (3):
 				time.sleep(3)
 				clear_output(wait = True)
 			break
-	    #if the last action did not complete the episode then we skip over the conditional clause and transition to the new state and move to the next time step
-	    #since we had already trained the model then we know that we can make actions based on exploitation rather than exploration
+	        #if the last action did not complete the episode then we skip over the conditional clause and transition to the new state and move to the next time step
+	        #since we had already trained the model then we know that we can make actions based on exploitation rather than exploration
 	    state = new_state
+
 #close the environment on completion of the episodes
 env.close()
 
