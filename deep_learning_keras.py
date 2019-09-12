@@ -32,7 +32,7 @@ model.compile(
 	metrics = ['accuracy']#since the problem at hand is a supervised learning task
 	)
 
-#fitting the model
+#training the model
 model.fit(
 	scaled_train_samples,#numpy array with training samples
 	train_labels,#numpy array with labels
@@ -41,4 +41,11 @@ model.fit(
 	epochs = 20,# no of times the full dataset is going to be passed through the neural net
 	shuffle = True,#data should be shuffled before being passed into the network to avoid overfitting
 	verbose = True #indicates how much logging information we get to see
+	)
+
+#adding the test set for doing predictions on
+predictions = model.predict(
+	scaled_test_samples,#numpy array with test samples
+	batch_size = 10,
+	verbose = 0
 	)
