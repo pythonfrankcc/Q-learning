@@ -46,6 +46,9 @@ model.fit(
 #adding the test set for doing predictions on
 predictions = model.predict(
 	scaled_test_samples,#numpy array with test samples
-	batch_size = 10,
+	batch_size = 10,#no of test samples passed as the input per iteration
 	verbose = 0
 	)
+#now printing the predictions so as to view them
+for p in predictions:
+	print(p)
