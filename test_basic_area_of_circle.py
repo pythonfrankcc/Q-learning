@@ -11,19 +11,27 @@ for r in radii:
 	print(message.format(radius=r,area=Area))'''
 #from the above test function we can already see an error in our function but lets comment out this and carry out a unittest using unittest module
 #when running this on python best use >>python -m unittest (xxx),where the -m instructs python to run the unttest module as a script
-#lets build our test class
+#lets build our test class that inherits from testcase
 class testCircleArea(unittest.TestCase):
 	#each test method must begin with the word test
+	#check the assert method in the documentation
 	def test_area(self):
 		#test the computational soundness of the function
 		self.assertAlmostEqual(area_of_circle(1),pi)#first arguement is the output of the function under test and second arguement is the correct answer
 		self.assertAlmostEqual(area_of_circle(2.1),pi*2.1**2)
-	#testing to see if the function  raises a value error when the input is a negative no
-	def test_values(self):
+	#testing to see if the function  raises a value error when the input is a negative no or using an edge case
+	'''def test_values(self):
 		self.assertRaises(ValueError,area_of_circle,-2)
 		#this spits out an error and you go back to your function and alter that
 		#python has various other assert methods that one can do your tests in
-	#making sure that the test spits out a type error when r is not a real no
+	#making sure that the test spits out a type error when r is not a real no'''
+
+	#alternatively you can also use a context manager
+	def test_values(self):
+		with self.assertRaises(ValueError):
+			area_of_circle(-2)
+
+	
 	def test_types(self):
 		self.assertRaises(TypeError,area_of_circle,3+5j)
 		self.assertRaises(TypeError,area_of_circle,True)
