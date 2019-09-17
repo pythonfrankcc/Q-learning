@@ -28,7 +28,7 @@ class testEmployee(unittest.Testcase):
 		#test now to see if the changes have been reflected
 		self.assertEqual(employee_1.email,'Jonathan.Macharia@gmial.com')
 		self.assertEqual(employee_2.email,'Solomon.Mugendi@gmail.com')
-		
+
 	def test_raise(self):
 		employee_1 = Employee('Francis','Macharia',20000)
 		employee_2 = Employee('Dickens','Mugendi',80000)
